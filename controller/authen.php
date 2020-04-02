@@ -38,7 +38,7 @@ if($stage == 'user'){
              AND a.delete_status = 'N'
              AND a.active_status = 'Y'
              AND b.info_use_status = 'Y'
-             AND (c.profile_use = 'Y' || c.profile_use IS NULL)
+             AND (c.profile_use = 'Y' OR c.profile_use IS NULL)
              LIMIT 1";
   $result = mysqli_query($conn, $strSQL);
   if(($result) && (mysqli_num_rows($result) > 0)){
