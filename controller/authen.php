@@ -14,8 +14,50 @@ if(!isset($_GET['protocol'])){
 $stage = mysqli_real_escape_string($conn, $_GET['stage']);
 $protocol = mysqli_real_escape_string($conn, $_GET['protocol']);
 
-if($stage == 'register'){
+if($stage == 'user'){
+  if(
+    (!isset($_POST['uid'])) ||
+    (!isset($_POST['role']))
+  ){
+    $return['response_status'] = 'Denine with un-completely parameters';
+    mysqli_close($conn); die();
+  }
 
+  $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+  $role = mysqli_real_escape_string($conn, $_POST['role']);
+
+  $strSQL = "SELECT * FROM ci2x_account a INNER JOIN ci2x_userinfo b ON a.UID = b.info_uid
+             LEFT JOIN ci2x_profile c ON a.UID = c.profile_uid
+             WHERE
+             a.UID = '$uid'
+             AND b.info_uid = '$uid'
+             AND a.role = '$role'
+             AND a.delete_status = 'N'
+             AND a.active_status = 'Y'
+             AND b.info_use_status = 'Y'
+             AND (c.profile_use = 'Y' || c.profile_use IS NULL)
+             LIMIT 1";
+  $result = mysqli_query($conn, $strSQL);
+  if(($result) && (mysqli_num_rows($result) > 0)){
+    $data = mysqli_fetch_assoc($result);
+    $return['response_status'] = 'Success';
+    $return['fname'] = $data['info_fname'];
+    $return['lname'] = $data['info_lname'];
+    $return['gender'] = $data['info_gender'];
+    $return['address'] = $data['info_address'];
+    $return['phone'] = $data['info_phone'];
+    $return['profile_img'] = $data['profile_fileurl'];
+    $return['PID'] = $data['info_pid'];
+  }else{
+    $return['response_status'] = 'No data found';
+    mysqli_close($conn); die();
+  }
+
+  echo json_encode($return);
+  mysqli_close($conn); die();
+} // End user
+
+if($stage == 'register'){
   if($protocol == 'email'){
     if(
       (!isset($_POST['fname'])) ||

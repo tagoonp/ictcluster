@@ -7,7 +7,8 @@
 var conf = {
   api: 'http://simanh.psu.ac.th/ictcluster/controller/',
   prefix: 'xe2s_',
-  app: 'web'
+  app: 'web',
+  root_dir: 'http://localhost/ictcluster/',
 }
 
 var current_user = window.localStorage.getItem(conf.prefix + 'uid')
