@@ -186,7 +186,7 @@ if($stage == 'get_log'){
   $log = mysqli_real_escape_string($conn, $_POST['log']);
 
   if($log == 'change_own_password'){
-    $strSQL = "SELECT * FROM ci2x_activity_log WHERE log_uid = '$uid' AND log_activity = 'Change own password'";
+    $strSQL = "SELECT * FROM ci2x_activity_log WHERE log_uid = '$uid' AND log_activity = 'Change own password' ORDER BY log_datetime DESC LIMIT 100";
     $query = mysqli_query($conn, $strSQL);
     if($query){
       while($row = mysqli_fetch_array($query)){

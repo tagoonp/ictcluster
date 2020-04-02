@@ -28,7 +28,21 @@ var authen = {
       var param = { uid: current_user, log: logtype}
       var ajax = $.post(conf.api + 'authen?stage=get_log&protocol=0', param, function(){}, 'json')
                   .always(function(snap){
-                    console.log(snap);
+                    if(core.snap_exist(snap)){
+                      // table-1-data
+                      $('#table-1-data').empty()
+                      snap.forEach(i=>{
+                        $('#table-1-data').append('<tr>'+
+                                                    '<td style="width: 150px;">' + i.log_datetime + '</th>' +
+                                                    '<td>' + i.log_uid + '</th>' +
+                                                    '<td>' + i.log_ip + '</th>' +
+                                                  '</tr>')
+                      })
+                      $("#table-1").dataTable({});
+                    }else{
+                      $("#table-1").dataTable({});
+                    }
+                    core.is_hideload(hl, 'get_log')
                   })
     }
   }

@@ -66,7 +66,7 @@
                 <div class="card mt-3">
                   <div class="card-body">
                     <h4>บันทึกการเปลี่ยนรหัสผ่าน</h4>
-                    <table class="table table-sm table-striped">
+                    <table class="table table-sm table-striped" id="table-1">
                       <thead>
                         <tr>
                           <th style="width: 150px;">วัน - เวลา</th>
@@ -74,7 +74,7 @@
                           <th>IP</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="table-1-data">
                         <tr>
                           <td colspan="3">ไม่พบข้อมูลบันทึก</td>
                         </tr>
