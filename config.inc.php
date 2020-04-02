@@ -7,11 +7,17 @@ ini_set('display_errors', 1);
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WisniorWeb */
+// define( 'DB_NAME', 'ictcluster' );
+// define( 'DB_USER', 'root' );
+// define( 'DB_PASSWORD', 'mandymorenn' );
+// define( 'DB_HOST', 'localhost' );
+// define( 'ROOT_DOMAIN', 'http://localhost/ictcluster/' );
+
 define( 'DB_NAME', 'ictcluster' );
 define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'mandymorenn' );
+define( 'DB_PASSWORD', 'mySsimanh#3' );
 define( 'DB_HOST', 'localhost' );
-define( 'ROOT_DOMAIN', 'http://localhost/ictcluster/' );
+define( 'ROOT_DOMAIN', 'http://simanh.psu.ac.th/ictcluster/' );
 
 
 $host = DB_HOST;
