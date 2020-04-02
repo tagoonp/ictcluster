@@ -22,7 +22,15 @@ var authen = {
                   }
                 })
     core.is_hideload(hl, arguments.callee.name)
-
+  },
+  get_log(hl, logtype){
+    if(logtype == 'change_own_password'){
+      var param = { uid: current_user, log: logtype}
+      var ajax = $.post(conf.api + 'authen?stage=get_log&protocol=0', param, function(){}, 'json')
+                  .always(function(snap){
+                    console.log(snap);
+                  })
+    }
   }
 }
 

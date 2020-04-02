@@ -173,6 +173,38 @@ if($stage == 'register'){
 
 } // End register
 
+if($stage == 'get_log'){
+  if(
+    (!isset($_POST['uid'])) ||
+    (!isset($_POST['log']))
+  ){
+    $return['response_status'] = 'Denine with un-completely parameters';
+    mysqli_close($conn); die();
+  }
+
+  $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+  $log = mysqli_real_escape_string($conn, $_POST['log']);
+
+  if($log == 'change_own_password'){
+    $strSQL = "SELECT * FROM ci2x_activity_log WHERE log_uid = '$uid' AND log_activity = 'Change own password'";
+    $query = mysqli_query($conn, $strSQL);
+    if($query){
+      while($row = mysqli_fetch_array($query)){
+        $b = array();
+        foreach ($row as $key => $value) {
+          if(!is_int($key)){
+            $b[$key] = $value;
+          }
+        }
+        $return[] = $b;
+      }
+    }
+  }
+
+  echo json_encode($return);
+  mysqli_close($conn); die();
+}
+
 if($stage == 'login'){
 
   if($protocol == 'email'){
