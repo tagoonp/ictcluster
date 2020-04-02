@@ -3,11 +3,13 @@ include "../config.inc.php";
 $return = array();
 if(!isset($_GET['stage'])){
   $return['response_status'] = 'Denine with no stage';
+  echo json_encode($return);
   mysqli_close($conn); die();
 }
 
 if(!isset($_GET['protocol'])){
   $return['response_status'] = 'Denine with no protocol';
+  echo json_encode($return);
   mysqli_close($conn); die();
 }
 
@@ -20,6 +22,7 @@ if($stage == 'user'){
     (!isset($_POST['role']))
   ){
     $return['response_status'] = 'Denine with un-completely parameters';
+    echo json_encode($return);
     mysqli_close($conn); die();
   }
 
@@ -50,7 +53,6 @@ if($stage == 'user'){
     $return['PID'] = $data['info_pid'];
   }else{
     $return['response_status'] = 'No data found';
-    mysqli_close($conn); die();
   }
 
   echo json_encode($return);
@@ -67,6 +69,7 @@ if($stage == 'register'){
       (!isset($_POST['password']))
     ){
       $return['response_status'] = 'Denine with un-completely parameters';
+      echo json_encode($return);
       mysqli_close($conn); die();
     }
 
@@ -81,6 +84,7 @@ if($stage == 'register'){
     $result = mysqli_query($conn, $strSQL);
     if(($result) && (mysqli_num_rows($result) > 0)){
       $return['response_status'] = 'Duplicate username';
+      echo json_encode($return);
       mysqli_close($conn); die();
     }
 
