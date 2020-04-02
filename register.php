@@ -1,4 +1,3 @@
-<?php include "config.inc.php"; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -51,7 +50,7 @@
             </nav>
           </div>
           <div class="col-12 col-sm-5 text-right" style="padding-top: 4px;">
-            <button type="button" name="button" class="btn btn-danger btn-sm" onclick="window.location='logon'">ล๊อคอิน</button>
+            <button type="button" name="button" class="btn btn-danger btn-sm" onclick="window.location='login'">ล๊อคอิน</button>
           </div>
         </div>
       </div>

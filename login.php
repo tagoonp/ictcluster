@@ -1,4 +1,3 @@
-<?php include "config.inc.php"; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -69,28 +68,30 @@
           <h5 class="text-center text-muted">Disaster Management Information System : DMIS</h5>
         </div>
         <div class="col-12 col-sm-4 offset-sm-4">
-          <div class="row mt-3">
-            <div class="col-12">
-              <div class="form-group">
-                <input type="text" class="form-control" name="" value="" placeholder="E-mail address ...">
+          <form class="loginForm" onsubmit="return false;">
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="E-mail address ...">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="password" class="form-control" name="txtPassword" id="txtPassword" placeholder="รหัสผ่านสำหรับเข้าใช้งานระบบ ...">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group text-center">
+                  <button type="submit" name="button" class="btn btn-primary btn-block">ล๊อคอิน</button>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group text-center">
+                  <button type="button" name="button" class="btn btn-block" onclick="window.location='register'">- สมัครใช้งานระบบ -</button>
+                </div>
               </div>
             </div>
-            <div class="col-12">
-              <div class="form-group">
-                <input type="text" class="form-control" name="" value="" placeholder="รหัสผ่านสำหรับเข้าใช้งานระบบ ...">
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group text-center">
-                <button type="button" name="button" class="btn btn-primary btn-block">ล๊อคอิน</button>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group text-center">
-                <button type="button" name="button" class="btn btn-block" onclick="window.location='register'">- สมัครใช้งานระบบ -</button>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -99,6 +100,9 @@
   <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js" ></script>
   <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+
+  <script type="text/javascript" src="./assets/custom/js/config.js"></script>
+  <script type="text/javascript" src="./assets/custom/js/page/login.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function(){

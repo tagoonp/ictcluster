@@ -2,12 +2,12 @@
 include "../config.inc.php";
 $return = array();
 if(!isset($_GET['stage'])){
-  $return[0]['response_status'] = 'Denine with no stage';
+  $return['response_status'] = 'Denine with no stage';
   mysqli_close($conn); die();
 }
 
 if(!isset($_GET['protocol'])){
-  $return[0]['response_status'] = 'Denine with no protocol';
+  $return['response_status'] = 'Denine with no protocol';
   mysqli_close($conn); die();
 }
 
@@ -24,7 +24,7 @@ if($stage == 'register'){
       (!isset($_POST['email'])) ||
       (!isset($_POST['password']))
     ){
-      $return[0]['response_status'] = 'Denine with un-completely parameters';
+      $return['response_status'] = 'Denine with un-completely parameters';
       mysqli_close($conn); die();
     }
 
@@ -38,7 +38,7 @@ if($stage == 'register'){
     $strSQL = "SELECT * FROM ci2x_account WHERE username = '$email' AND delete_status = 'N' AND active_status = 'Y' AND register_protocal = 'email'";
     $result = mysqli_query($conn, $strSQL);
     if(($result) && (mysqli_num_rows($result) > 0)){
-      $return[0]['response_status'] = 'Duplicate username';
+      $return['response_status'] = 'Duplicate username';
       mysqli_close($conn); die();
     }
 
@@ -56,22 +56,54 @@ if($stage == 'register'){
                 ";
       $resultInsert2 = mysqli_query($conn, $strSQL);
       if($resultInsert2){
-        $return[0]['response_status'] = 'Success';
-        $return[0]['response_uid'] = $uid;
-        $return[0]['response_role'] = 'common';
+        $return['response_status'] = 'Success';
+        $return['response_uid'] = $uid;
+        $return['response_role'] = 'common';
       }else{
         $strSQL = "DELETE FROM ci2x_account WHERE UID = '$uid'";
                    mysqli_query($conn, $strSQL);
-        $return[0]['response_status'] = 'Can not create account (ax0002)';
+        $return['response_status'] = 'Can not create account (ax0002)';
       }
     }else{
-      $return[0]['response_status'] = 'Can not create account (ax0001)';
+      $return['response_status'] = 'Can not create account (ax0001)';
     }
     echo json_encode($return);
     mysqli_close($conn); die();
   } // End register with email
 
 } // End register
+
+if($stage == 'login'){
+
+  if($protocol == 'email'){
+    if(
+      (!isset($_POST['email'])) ||
+      (!isset($_POST['password']))
+    ){
+      $return['response_status'] = 'Denine with un-completely parameters';
+      mysqli_close($conn); die();
+    }
+
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, base64_encode($_POST['password']));
+
+    $strSQL = "SELECT * FROM ci2x_account WHERE username = '$email' AND password = '$password' AND delete_status = 'N' AND active_status = 'Y' AND register_protocal = 'email' LIMIT 1";
+    $result = mysqli_query($conn, $strSQL);
+    if(($result) && (mysqli_num_rows($result) > 0)){
+      $data = mysqli_fetch_assoc($result);
+      $return['response_status'] = 'Success';
+      $return['response_uid'] = $data['UID'];
+      $return['response_role'] = $data['role'];
+    }else{
+      $return['response_status'] = 'No data found';
+      mysqli_close($conn); die();
+    }
+
+    echo json_encode($return);
+    mysqli_close($conn); die();
+  } // End register with email
+
+} // End login
 
 
 ?>
