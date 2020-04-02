@@ -37,16 +37,17 @@ $(function(){
     if($check != 0){ return ;}
     preload.show()
     var param = { uid: current_user, password: $('#txtPassword1').val() }
-    var ajax = $.post(conf.api + 'authen?updatepassword&protocol=self', param, function(){}, 'json')
+    var ajax = $.post(conf.api + 'authen?stage=updatepassword&protocol=self', param, function(){}, 'json')
                 .always(function(snap){
                   if((snap!='') && (snap.response_status == 'Success')){
                     $('#modalChangepassword').modal('hide')
                     $('#txtPassword1').val('')
                     $('#txtPassword2').val('')
                     alert('ปรับปรุงรหัสผ่านสำเร็จ')
+                    preload.hide()
                   }else{
                     preload.hide()
-                    alert('Can not login')
+                    alert('ไม่สามารถเปลี่ยนรหัสผ่านได้')
                   }
                 })
   })

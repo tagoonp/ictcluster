@@ -152,6 +152,10 @@ if($stage == 'register'){
                 ";
       $resultInsert2 = mysqli_query($conn, $strSQL);
       if($resultInsert2){
+
+        $strSQL = "INSERT INTO ci2x_activity_log (log_datetime, log_ip, log_activity, log_uid) VALUES ('$sysdatetime', '$ip', 'Register', '$uid')";
+                  mysqli_query($conn, $strSQL);
+
         $return['response_status'] = 'Success';
         $return['response_uid'] = $uid;
         $return['response_role'] = 'common';
@@ -187,6 +191,12 @@ if($stage == 'login'){
     $result = mysqli_query($conn, $strSQL);
     if(($result) && (mysqli_num_rows($result) > 0)){
       $data = mysqli_fetch_assoc($result);
+
+      $uid = $data['UID'];
+
+      $strSQL = "INSERT INTO ci2x_activity_log (log_datetime, log_ip, log_activity, log_uid) VALUES ('$sysdatetime', '$ip', 'Log in', '$uid')";
+                mysqli_query($conn, $strSQL);
+
       $return['response_status'] = 'Success';
       $return['response_uid'] = $data['UID'];
       $return['response_role'] = $data['role'];
