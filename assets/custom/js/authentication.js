@@ -14,9 +14,40 @@ var authen = {
     var param = { uid: current_user , role: current_role }
     var ajax = $.post(conf.api + 'authen?stage=user&protocol=0', param, function(){}, 'json')
                 .always(function(snap){
-                  console.log(snap);
+                  if(snap.response_status == 'Success'){
+                    $('.current_user_fullname').html(snap.fname + ' ' + snap.lname)
+                  }else{
+                    alert('Session denine')
+                    authen.logout()
+                  }
                 })
     core.is_hideload(hl, arguments.callee.name)
 
   }
 }
+
+
+$(function(){
+  $('.changepasswordForm').submit(function(){
+    $check = 0
+    $('.form-control').removeClass('is-invalid')
+    if($('#txtPassword1').val() == ''){ $check++; $('#txtPassword1').addClass('is-invalid'); }
+    if($('#txtPassword2').val() == ''){ $check++; $('#txtPassword2').addClass('is-invalid'); }
+    if($('#txtPassword1').val() != $('#txtPassword2').val()){ $check++; $('#txtPassword2').addClass('is-invalid'); }
+    if($check != 0){ return ;}
+    preload.show()
+    var param = { uid: current_user, password: $('#txtPassword1').val() }
+    var ajax = $.post(conf.api + 'authen?updatepassword&protocol=self', param, function(){}, 'json')
+                .always(function(snap){
+                  if((snap!='') && (snap.response_status == 'Success')){
+                    $('#modalChangepassword').modal('hide')
+                    $('#txtPassword1').val('')
+                    $('#txtPassword2').val('')
+                    alert('ปรับปรุงรหัสผ่านสำเร็จ')
+                  }else{
+                    preload.hide()
+                    alert('Can not login')
+                  }
+                })
+  })
+})

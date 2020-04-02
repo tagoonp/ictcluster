@@ -16,6 +16,55 @@ if(!isset($_GET['protocol'])){
 $stage = mysqli_real_escape_string($conn, $_GET['stage']);
 $protocol = mysqli_real_escape_string($conn, $_GET['protocol']);
 
+if($stage == 'updatepassword'){
+  if(
+    (!isset($_POST['uid'])) ||
+    (!isset($_POST['password']))
+  ){
+    $return['response_status'] = 'Denine with un-completely parameters';
+    echo json_encode($return);
+    mysqli_close($conn); die();
+  }
+
+  $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+  $password = mysqli_real_escape_string($conn, base64_encode($_POST['password']));
+
+  if($protocol == 'self'){
+    $strSQL = "UPDATE ci2x_account SET password = '$password' WHERE UID = '$uid'";
+    $result = mysqli_query($conn, $strSQL);
+    if($result){
+      $strSQL = "INSERT INTO ci2x_activity_log (log_datetime, log_ip, log_activity, log_uid) VALUES ('$sysdatetime', '$ip', 'Change own password', '$uid')";
+                mysqli_query($conn, $strSQL);
+      $return['response_status'] = 'Success';
+    }else{
+      $return['response_status'] = 'Fail';
+    }
+  }else if($protocol == 'other'){
+
+    if(!isset($_POST['user_uid'])){
+      $return['response_status'] = 'Denine with un-completely parameters';
+      echo json_encode($return);
+      mysqli_close($conn); die();
+    }
+
+    $user_uid = mysqli_real_escape_string($conn, $_POST['user_uid']);
+
+    $strSQL = "UPDATE ci2x_account SET password = '$password' WHERE UID = '$user_uid'";
+    $result = mysqli_query($conn, $strSQL);
+    if($result){
+      $strSQL = "INSERT INTO ci2x_activity_log (log_datetime, log_ip, log_activity, log_uid) VALUES ('$sysdatetime', '$ip', 'Change other user (UID : $user_uid) password', '$uid')";
+                mysqli_query($conn, $strSQL);
+      $return['response_status'] = 'Success';
+    }else{
+      $return['response_status'] = 'Fail';
+    }
+  }else{
+    $return['response_status'] = 'Fail';
+  }
+  echo json_encode($return);
+  mysqli_close($conn); die();
+}
+
 if($stage == 'user'){
   if(
     (!isset($_POST['uid'])) ||
@@ -49,6 +98,7 @@ if($stage == 'user'){
     $return['gender'] = $data['info_gender'];
     $return['address'] = $data['info_address'];
     $return['phone'] = $data['info_phone'];
+    $return['role'] = $data['role'];
     $return['profile_img'] = $data['profile_fileurl'];
     $return['PID'] = $data['info_pid'];
   }else{

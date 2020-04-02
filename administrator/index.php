@@ -51,8 +51,9 @@
               </div>
             </nav>
           </div>
-          <div class="col-12 col-sm-5 text-right" style="padding-top: 4px;">
-            <button type="button" name="button" class="btn btn-danger btn-sm" onclick="authen.logout()">ออกจากระบบ</button>
+          <div class="col-12 col-sm-5 text-right text-dark" style="padding-top: 4px;">
+            <i class="fas fa-user"></i> สวัสดี, คุณ<a href="../myaccount/" class="current_user_fullname"><i class="fas fa-sync fa-spin"></i></a>
+            <button type="button" name="button" class="btn btn-danger btn-sm ml-2" onclick="authen.logout()">ออกจากระบบ</button>
           </div>
         </div>
       </div>
