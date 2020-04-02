@@ -52,7 +52,7 @@ if($stage == 'user'){
     $return['profile_img'] = $data['profile_fileurl'];
     $return['PID'] = $data['info_pid'];
   }else{
-    $return['response_status'] = 'No data found';
+    $return['response_status'] = 'No data found'.$strSQL;
   }
 
   echo json_encode($return);
