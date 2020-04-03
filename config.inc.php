@@ -14,8 +14,8 @@ ini_set('display_errors', 1);
 // define( 'ROOT_DOMAIN', 'http://localhost/ictcluster/' );
 
 define( 'DB_NAME', 'ictcluster' );
-define( 'DB_USER', 'root' );
-define( 'DB_PASSWORD', 'mySsimanh#3' );
+define( 'DB_USER', 'ictcluster' );
+define( 'DB_PASSWORD', 'sx3adxu67i' );
 define( 'DB_HOST', 'localhost' );
 define( 'ROOT_DOMAIN', 'http://simanh.psu.ac.th/ictcluster/' );
 

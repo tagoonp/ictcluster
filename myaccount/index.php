@@ -44,7 +44,7 @@
                 <a class="nav-link active fx3" href="index">หน้าแรก</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-dark" href="prpfile">ข้อมูลส่วนตัว</a>
+                <a class="nav-link text-dark" href="profile">ข้อมูลส่วนตัว</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-dark" href="data">บันทึกและการนำเสนอ</a>

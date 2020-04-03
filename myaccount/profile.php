@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="../node_modules/preload.js/dist/css/preload.css">
-    <link rel="stylesheet" href="../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="../assets/custom/css/style.css">
     <link rel="stylesheet" href="../assets/custom/css/map.css">
@@ -45,13 +44,13 @@
                 <a class="nav-link text-dark " href="index">หน้าแรก</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-dark" href="profile">ข้อมูลส่วนตัว</a>
+                <a class="nav-link active fx3" href="profile">ข้อมูลส่วนตัว</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-dark" href="data">บันทึกและการนำเสนอ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active fx3" href="security">ความปลอดภัย</a>
+                <a class="nav-link text-dark" href="security">ความปลอดภัย</a>
               </li>
             </ul>
           </div>
@@ -59,24 +58,25 @@
             <div class="row">
               <div class="col-12 text-center">
                 <div class="fx3" style="font-size: 30px;">
-                  ความปลอดภัย
+                  ข้อมูลส่วนตัว
                 </div>
               </div>
               <div class="col-12">
                 <div class="card mt-3">
-                  <div class="card-body">
-                    <h4>บันทึกการเปลี่ยนรหัสผ่าน</h4>
-                    <table class="table table-sm table-striped" id="table-1">
-                      <thead>
+                  <div class="card-body p-0">
+                    <div class="p-3">
+                      <h4>ข้อมูลทั่วไป</h4>
+                    </div>
+
+                    <table class="table table-striped">
+                      <tbody>
                         <tr>
-                          <th style="width: 150px;">วัน - เวลา</th>
-                          <th>โดย</th>
-                          <th>IP</th>
-                        </tr>
-                      </thead>
-                      <tbody id="table-1-data">
-                        <tr>
-                          <td colspan="3">ไม่พบข้อมูลบันทึก</td>
+                          <td>
+
+                          </td>
+                          <td>
+
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -90,12 +90,42 @@
     </div>
   </body>
 
+  <!-- Modal -->
+  <div class="modal fade" id="modalChangepassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">เปลี่ยนรหัสผ่าน</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="changepasswordForm" onsubmit="return false;">
+            <div class="form-group">
+              <label for="">ตั้งรหัสผ่านใหม่ : <span class="text-danger">*</span> </label>
+              <input type="password" name="txtPassword1" id="txtPassword1" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="">ยืนยันรหัสผ่านใหม่อีกครั้ง : <span class="text-danger">*</span> </label>
+              <input type="password" name="txtPassword2" id="txtPassword2" class="form-control">
+            </div>
+            <div class="form-group text-right">
+              <button type="button" name="button" class="btn" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" name="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js" ></script>
   <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="../node_modules/preload.js/dist/js/preload.js"></script>
-  <script type="text/javascript" src="../node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
   <script type="text/javascript" src="../assets/custom/js/config.js"></script>
   <script type="text/javascript" src="../assets/custom/js/core.js"></script>
@@ -103,8 +133,7 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      authen.current_user()
-      authen.get_log('get_log', 'change_own_password')
+      authen.current_user('current_user')
     })
   </script>
 </html>
